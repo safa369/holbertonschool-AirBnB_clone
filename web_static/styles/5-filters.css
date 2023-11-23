@@ -27,7 +27,8 @@ button:hover{
 }
 .locations .amenities{
     height: 100%;
-    width:25%;
-    border-right: #DDDDDD;
-    left: 1px;
+    width:25%;    
 }
+.filters div:first-child{
+    border: 1px solid #DDDDDD;}
+    

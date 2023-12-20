@@ -6,17 +6,26 @@ from datetime import datetime
 
 
 class BaseModel():
-    """a class base model that defines all common attributes/methods
+    """a class base model that defines all common attributes/methods.
     Attributes:
             id: the id of each basemodel (string).
             created_at: the date and time when the instance is created.
             updated_at: the date and time when the instance is apdated."""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """assign the attributes"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs:
+            del kwargs["__class__"]
+            for key, val in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    dt_f = datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, dt_f)
+                else:
+                    setattr(self, key, val)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """return the infrmation n human readable"""

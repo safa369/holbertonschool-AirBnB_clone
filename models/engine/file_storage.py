@@ -38,8 +38,8 @@ class FileStorage():
     def reload(self):
         try:
             if os.path.exists(FileStorage.__file_path):
-                with open(FileStorage.__file_path, "r", encoding="utf-8"):
-                    new_dict = json.load()
+                with open(FileStorage.__file_path, "r", encoding="utf-8") as fo:
+                    new_dict = json.load(fo)
                 for key, val in new_dict.items():
                     base = self.cl_dict[val["__class__"]](**val)
                     self.__objects[key] = base

@@ -21,14 +21,6 @@ class HBNBCommand(cmd.Cmd):
         """Handles empty line."""
         pass
 
-    def help_quit(self):
-        """ Help message for quit command."""
-        print("Quit the console.")
-
-    def help_EOF(self):
-        """Help message for EOF command."""
-        print("Exit the console.")
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

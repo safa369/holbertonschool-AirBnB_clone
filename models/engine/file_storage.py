@@ -2,6 +2,7 @@
 """Class creation to define attrs/methods of the console"""
 from os import path
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -22,9 +23,10 @@ class FileStorage:
 
     def save(self):
         """Serializes '__objects' dictionary to a JSON file"""
-        if path.exists(self.__file_path):
-            with open(self.__file_path, "w") as file:
-                file.write(json.dumps(self.__objects))
+        data = {key: value.to_dict() if isinstance(value, BaseModel) else value
+                for key, value in self.__objects.items()}
+        with open(self.__file_path, mode='w') as file:
+            json.dump(data, file)
 
     def reload(self):
         """Deserializes the JSON file to __objects' dictionary'"""

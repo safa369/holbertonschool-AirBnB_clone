@@ -3,12 +3,12 @@
 
 import uuid
 from datetime import datetime
-from . import storage
 
 
 class BaseModel:
     """This is the base model class    """
     def __init__(self, *args, **kwargs):
+        from . import storage
         """
     Args:
         *args: Unused positional arguments
@@ -44,6 +44,7 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        from . import storage
         """ Updates the public instance attribute update_at
         with the current datetime"""
         self.updated_at = datetime.now()
